@@ -25,8 +25,13 @@ struct GiveCoinsRequest: Codable {
 class ChatObject: ObservableObject {
     let networkingService: ProductionNetworkingService
 
-    let openAI = OpenAI(apiToken: "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")
+    var messages: [Chat] = []
 
+    @Published var response: String = ""
+
+    var timer: Timer?
+
+    let openAI = OpenAI(apiToken: "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")
     var users: [UserCompact] = []
 
     init() {
@@ -69,9 +74,14 @@ class ChatObject: ObservableObject {
         ]
     }
 
-    var messages: [Chat] = []
-
     func send(prompt: String) {
+        // Timer that changes response variable every 2 seconds from array of emojis
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+            let emojis = ["🤔", "😐", "🤨", "😕", "😑", "😶", "🙄", "😏", "😒", "🤐", "😬", "🤥", "🤫", "🤭", "🧐", "🤓", "😈", "👿", "👹", "👺", "💀", "👻", "👽", "🤖", "💩", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"]
+            let randomIndex = Int.random(in: 0..<emojis.count)
+            self.response = emojis[randomIndex]
+        }
+
         messages = [Chat(role: .user, content: prompt)]
         sendMessages()
     }
@@ -108,12 +118,33 @@ class ChatObject: ObservableObject {
                 Task {
                     do {
                         try await giveKudos(amount: giveCoinsRequest.amount, message: giveCoinsRequest.reason, id: giveCoinsRequest.userId)
+                        self.messages += [Chat(role: .function, content: "Hotovo. Neposielaj JSON, vráť mi len success správu.", name: functionCall.name)]
+                        sendMessages()
                     } catch {
                         print(error)
                     }
                 }
+            case "getPersonBudget":
+                Task {
+                    do {
+                        let budget = await try self.getUserBaget()
+                        self.messages += [Chat(role: .function, content: "\(budget)", name: functionCall.name)]
+                        sendMessages()
+                    } catch {
+                        print(error)
+                    }
+
+                }
             default:
                 print("unimplemented function \(choice.message.functionCall)")
+            }
+        }
+
+        if choice.finishReason == "stop" {
+            DispatchQueue.main.async {
+                self.response = choice.message.content ?? ""
+                self.timer?.invalidate()
+                self.timer = nil
             }
         }
     }
@@ -135,29 +166,43 @@ class ChatObject: ObservableObject {
     func giveKudos(amount: Int, message: String, id: String) async throws {
         _ = try await networkingService.perform(mutation: GiveKudosMutation(input: GiveKudosInput(amount: amount, message: message, to: id)), publishResultToStore: false, queue: .main)
     }
+
+    func getUserBaget() async throws -> Int {
+        let data = try await networkingService.fetch(query: LoggedUserQuery(), cachePolicy: .returnCacheDataAndFetch, queue: .main)
+        return data.me.balance
+    }
 }
-
-
-
 
 
 struct ChatView: View {
     @StateObject var chat: ChatObject = ChatObject()
 
-    @State var prompt: String = "Daj Radek 1 coinov."
-    @State var response: String = ""
+    @State var prompt: String = "Kolko mám coinov?"
 
     var body: some View {
         VStack {
-            // texField input
-            TextField("Input", text: $prompt)
+            HStack {
+                TextField("Input", text: $prompt)
+                    .padding()
+
+                Button("Send") {
+                    chat.send(prompt: prompt)
+                }
                 .padding()
-
-            Button("Send") {
-                chat.send(prompt: prompt)
             }
+            .padding(5)
+            .background(Color.gray.opacity(0.3))
+            .cornerRadius(15)
+            .padding()
 
-            Text(response)
+            Spacer()
+
+            Text(chat.response)
+                .font(.title)
+                .bold()
+
+            Spacer()
+
         }
         .task {
             chat.loadUsers()
