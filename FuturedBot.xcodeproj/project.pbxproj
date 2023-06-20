@@ -13,6 +13,23 @@
 		946EAB8D2A41AC6A004ECD2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946EAB8C2A41AC6A004ECD2A /* Preview Assets.xcassets */; };
 		94A2F0452A41BAF20075C85A /* AnalyzeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2F0442A41BAF20075C85A /* AnalyzeView.swift */; };
 		94D5C9AB2A41BC6C006F18C4 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 94D5C9AA2A41BC6C006F18C4 /* OpenAI */; };
+		C0E520942A41C235002FC3D6 /* GraphQL.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E5208C2A41C235002FC3D6 /* GraphQL.generated.swift */; };
+		C0E520952A41C235002FC3D6 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C0E5208D2A41C235002FC3D6 /* Queries.graphql */; };
+		C0E520962A41C235002FC3D6 /* Mutations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C0E5208E2A41C235002FC3D6 /* Mutations.graphql */; };
+		C0E520972A41C235002FC3D6 /* CancellableContinuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E5208F2A41C235002FC3D6 /* CancellableContinuation.swift */; };
+		C0E520982A41C235002FC3D6 /* APIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520902A41C235002FC3D6 /* APIAdapter.swift */; };
+		C0E520992A41C235002FC3D6 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = C0E520912A41C235002FC3D6 /* schema.json */; };
+		C0E5209A2A41C235002FC3D6 /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520922A41C235002FC3D6 /* NetworkInterceptorProvider.swift */; };
+		C0E5209B2A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520932A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift */; };
+		C0E520A02A41C283002FC3D6 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E5209F2A41C283002FC3D6 /* NetworkingService.swift */; };
+		C0E520A32A41C75B002FC3D6 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = C0E520A22A41C75B002FC3D6 /* Apollo */; };
+		C0E520A52A41C7E5002FC3D6 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520A42A41C7E4002FC3D6 /* KeychainService.swift */; };
+		C0E520A82A41C804002FC3D6 /* FTPropertyWrappers in Frameworks */ = {isa = PBXBuildFile; productRef = C0E520A72A41C804002FC3D6 /* FTPropertyWrappers */; };
+		C0E520AD2A41C838002FC3D6 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520AA2A41C838002FC3D6 /* NetworkingError.swift */; };
+		C0E520AE2A41C838002FC3D6 /* StandardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520AB2A41C838002FC3D6 /* StandardError.swift */; };
+		C0E520AF2A41C838002FC3D6 /* ApolloError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520AC2A41C838002FC3D6 /* ApolloError.swift */; };
+		C0E520B22A41C864002FC3D6 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520B12A41C864002FC3D6 /* Credentials.swift */; };
+		C0E520B52A41CC0B002FC3D6 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520B42A41CC0B002FC3D6 /* URL+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +40,21 @@
 		946EAB8C2A41AC6A004ECD2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		94A2F0442A41BAF20075C85A /* AnalyzeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeView.swift; sourceTree = "<group>"; };
 		94D5C9A92A41BC63006F18C4 /* OpenAI-functions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "OpenAI-functions"; sourceTree = "<group>"; };
+		C0E5208C2A41C235002FC3D6 /* GraphQL.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQL.generated.swift; sourceTree = "<group>"; };
+		C0E5208D2A41C235002FC3D6 /* Queries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
+		C0E5208E2A41C235002FC3D6 /* Mutations.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mutations.graphql; sourceTree = "<group>"; };
+		C0E5208F2A41C235002FC3D6 /* CancellableContinuation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancellableContinuation.swift; sourceTree = "<group>"; };
+		C0E520902A41C235002FC3D6 /* APIAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAdapter.swift; sourceTree = "<group>"; };
+		C0E520912A41C235002FC3D6 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		C0E520922A41C235002FC3D6 /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
+		C0E520932A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApolloAsyncClientProtocol.swift; sourceTree = "<group>"; };
+		C0E5209F2A41C283002FC3D6 /* NetworkingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		C0E520A42A41C7E4002FC3D6 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		C0E520AA2A41C838002FC3D6 /* NetworkingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		C0E520AB2A41C838002FC3D6 /* StandardError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardError.swift; sourceTree = "<group>"; };
+		C0E520AC2A41C838002FC3D6 /* ApolloError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApolloError.swift; sourceTree = "<group>"; };
+		C0E520B12A41C864002FC3D6 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		C0E520B42A41CC0B002FC3D6 /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +63,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				94D5C9AB2A41BC6C006F18C4 /* OpenAI in Frameworks */,
+				C0E520A82A41C804002FC3D6 /* FTPropertyWrappers in Frameworks */,
+				C0E520A32A41C75B002FC3D6 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +92,11 @@
 		946EAB842A41AC6A004ECD2A /* FuturedBot */ = {
 			isa = PBXGroup;
 			children = (
+				C0E520B32A41CC02002FC3D6 /* Extensions */,
+				C0E520B02A41C85D002FC3D6 /* Model */,
+				C0E520A92A41C82A002FC3D6 /* Errors */,
+				C0E5208B2A41C235002FC3D6 /* GraphQL */,
+				C0E5209E2A41C272002FC3D6 /* Services */,
 				946EAB852A41AC6A004ECD2A /* FuturedBotApp.swift */,
 				946EAB872A41AC6A004ECD2A /* ChatView.swift */,
 				94A2F0442A41BAF20075C85A /* AnalyzeView.swift */,
@@ -90,6 +129,56 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		C0E5208B2A41C235002FC3D6 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				C0E5208C2A41C235002FC3D6 /* GraphQL.generated.swift */,
+				C0E5208D2A41C235002FC3D6 /* Queries.graphql */,
+				C0E5208E2A41C235002FC3D6 /* Mutations.graphql */,
+				C0E5208F2A41C235002FC3D6 /* CancellableContinuation.swift */,
+				C0E520902A41C235002FC3D6 /* APIAdapter.swift */,
+				C0E520912A41C235002FC3D6 /* schema.json */,
+				C0E520922A41C235002FC3D6 /* NetworkInterceptorProvider.swift */,
+				C0E520932A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		C0E5209E2A41C272002FC3D6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C0E520A42A41C7E4002FC3D6 /* KeychainService.swift */,
+				C0E5209F2A41C283002FC3D6 /* NetworkingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C0E520A92A41C82A002FC3D6 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				C0E520AC2A41C838002FC3D6 /* ApolloError.swift */,
+				C0E520AA2A41C838002FC3D6 /* NetworkingError.swift */,
+				C0E520AB2A41C838002FC3D6 /* StandardError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		C0E520B02A41C85D002FC3D6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0E520B12A41C864002FC3D6 /* Credentials.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0E520B32A41CC02002FC3D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0E520B42A41CC0B002FC3D6 /* URL+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -108,6 +197,8 @@
 			name = FuturedBot;
 			packageProductDependencies = (
 				94D5C9AA2A41BC6C006F18C4 /* OpenAI */,
+				C0E520A22A41C75B002FC3D6 /* Apollo */,
+				C0E520A72A41C804002FC3D6 /* FTPropertyWrappers */,
 			);
 			productName = FuturedBot;
 			productReference = 946EAB822A41AC6A004ECD2A /* FuturedBot.app */;
@@ -138,6 +229,8 @@
 			);
 			mainGroup = 946EAB792A41AC6A004ECD2A;
 			packageReferences = (
+				C0E520A12A41C75B002FC3D6 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				C0E520A62A41C804002FC3D6 /* XCRemoteSwiftPackageReference "FTPropertyWrappers" */,
 			);
 			productRefGroup = 946EAB832A41AC6A004ECD2A /* Products */;
 			projectDirPath = "";
@@ -153,7 +246,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0E520952A41C235002FC3D6 /* Queries.graphql in Resources */,
+				C0E520992A41C235002FC3D6 /* schema.json in Resources */,
 				946EAB8D2A41AC6A004ECD2A /* Preview Assets.xcassets in Resources */,
+				C0E520962A41C235002FC3D6 /* Mutations.graphql in Resources */,
 				946EAB8A2A41AC6A004ECD2A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,8 +261,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0E5209B2A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift in Sources */,
+				C0E520982A41C235002FC3D6 /* APIAdapter.swift in Sources */,
 				946EAB882A41AC6A004ECD2A /* ChatView.swift in Sources */,
+				C0E520AE2A41C838002FC3D6 /* StandardError.swift in Sources */,
+				C0E5209A2A41C235002FC3D6 /* NetworkInterceptorProvider.swift in Sources */,
+				C0E520A52A41C7E5002FC3D6 /* KeychainService.swift in Sources */,
+				C0E520A02A41C283002FC3D6 /* NetworkingService.swift in Sources */,
+				C0E520B52A41CC0B002FC3D6 /* URL+Extensions.swift in Sources */,
 				94A2F0452A41BAF20075C85A /* AnalyzeView.swift in Sources */,
+				C0E520AF2A41C838002FC3D6 /* ApolloError.swift in Sources */,
+				C0E520942A41C235002FC3D6 /* GraphQL.generated.swift in Sources */,
+				C0E520B22A41C864002FC3D6 /* Credentials.swift in Sources */,
+				C0E520972A41C235002FC3D6 /* CancellableContinuation.swift in Sources */,
+				C0E520AD2A41C838002FC3D6 /* NetworkingError.swift in Sources */,
 				946EAB862A41AC6A004ECD2A /* FuturedBotApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,10 +477,39 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C0E520A12A41C75B002FC3D6 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.53.0;
+			};
+		};
+		C0E520A62A41C804002FC3D6 /* XCRemoteSwiftPackageReference "FTPropertyWrappers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/futuredapp/FTPropertyWrappers";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		94D5C9AA2A41BC6C006F18C4 /* OpenAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OpenAI;
+		};
+		C0E520A22A41C75B002FC3D6 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0E520A12A41C75B002FC3D6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		C0E520A72A41C804002FC3D6 /* FTPropertyWrappers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0E520A62A41C804002FC3D6 /* XCRemoteSwiftPackageReference "FTPropertyWrappers" */;
+			productName = FTPropertyWrappers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
