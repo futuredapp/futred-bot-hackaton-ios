@@ -30,6 +30,7 @@
 		C0E520AF2A41C838002FC3D6 /* ApolloError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520AC2A41C838002FC3D6 /* ApolloError.swift */; };
 		C0E520B22A41C864002FC3D6 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520B12A41C864002FC3D6 /* Credentials.swift */; };
 		C0E520B52A41CC0B002FC3D6 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520B42A41CC0B002FC3D6 /* URL+Extensions.swift */; };
+		C0E520B82A41F695002FC3D6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E520B72A41F695002FC3D6 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		C0E520AC2A41C838002FC3D6 /* ApolloError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApolloError.swift; sourceTree = "<group>"; };
 		C0E520B12A41C864002FC3D6 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		C0E520B42A41CC0B002FC3D6 /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		C0E520B72A41F695002FC3D6 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				C0E5209E2A41C272002FC3D6 /* Services */,
 				946EAB852A41AC6A004ECD2A /* FuturedBotApp.swift */,
 				946EAB872A41AC6A004ECD2A /* ChatView.swift */,
+				C0E520B72A41F695002FC3D6 /* WebView.swift */,
 				94A2F0442A41BAF20075C85A /* AnalyzeView.swift */,
 				946EAB892A41AC6A004ECD2A /* Assets.xcassets */,
 				946EAB8B2A41AC6A004ECD2A /* Preview Content */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0E5209B2A41C235002FC3D6 /* ApolloAsyncClientProtocol.swift in Sources */,
+				C0E520B82A41F695002FC3D6 /* WebView.swift in Sources */,
 				C0E520982A41C235002FC3D6 /* APIAdapter.swift in Sources */,
 				946EAB882A41AC6A004ECD2A /* ChatView.swift in Sources */,
 				C0E520AE2A41C838002FC3D6 /* StandardError.swift in Sources */,

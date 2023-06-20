@@ -7,75 +7,94 @@
 
 import Foundation
 import SwiftUI
+import OpenAI
 
-// View that containts TextField input
-struct AnalyzeView: View {
-
-    @State var inputText: String = ""
-    @State var response: String = ""
-    @State var searchedGif: GIPHYClip? = nil
+struct Tag: Identifiable {
+    let value: String
     
-    var body: some View {
-        ScrollView {
-            VStack {
-                TextField("Enter text to analyze", text: $inputText)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                
-                Button("Analyze") {
-                    print("analyze")
-                    analyze(text: inputText)
-                }
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                
-                Text(response)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                
-                Button("Test Networking") {
-                    Task {
-                        //                    let users = try await loadActiveUsers()
-                        //                    print("Users", users)
-                        loadGIF(for: "cheesburger")
-                        
-                    }
-                }
-                if let searchedGif = searchedGif {
-                    WebView(url: URL(urlString: searchedGif.embed_url))
-                        .frame(width: 300, height: 200)
-                } else {
-                    Text("LOADUJU PIICO!")
-                }
+    var id: String {
+        value
+    }
+}
+
+class AnalyzeObject: ObservableObject {
+    let openAI = OpenAI(apiToken: "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")
+
+    @Published var searchedGif: GIPHYClip? = nil
+    @Published var searchedTags: [Tag] = []
+
+    func tagsPrompt(with message: String) -> [Chat] {
+        [Chat(role: .user, content: "Toto je ocenění ze systému Futured Coin na oceňování mezi kolegy. Identifikuj jednu až tři kategorii, do které lze toto ocenění přiřadit (např. týmová práce, psychická podpora, spokojené bříško). Kategorie vrať jako jeden řetězec ve kterém budou jednotlivé kategorie oddělené znakem \",\" Text ocenění: \(message)")]
+    }
+    
+    func giphyPrompt(with message: String) -> [Chat] {
+        [Chat(role: .user, content: "Jsi bot, který extrahuje informace ze zpráv. Extrahuj mi z následující zprávy stručný řetězec v angličtině bez konkrétních jmen o maximálně třech slovech, vhodný pro pojmenování vtipného GIFu: \(message).")]
+    }
+    
+    func analyze(prompt: String) {
+        analyzeTags(prompt: tagsPrompt(with: prompt))
+        analyzeGiphy(prompt: giphyPrompt(with: prompt))
+    }
+
+    func analyzeTags(prompt: [Chat]) {
+        openAI.chats(query: ChatQuery(
+            model: .gpt4_0613,
+            messages: prompt
+        )) { result in
+            switch result {
+            case .success(let response):
+                self.processTagsChoises(response.choices)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
-    
-    func loadActiveUsers() async throws -> [UserCompact] {
-        let baseUrl = URL(urlString: "https://coin.futured.dev/graphql")
-        let keychainService = ProductionKeychainService()
-        keychainService.credentials = Credentials(accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZGVrLmRvbGV6YWxAZnV0dXJlZC5hcHAiLCJzdWIiOiI2M2Y5MjE1ZDk0ODI5NDI3NmUzYzYzNmIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjg3MjYxODM5LCJleHAiOjE2ODcyNjU0Mzl9.Ri_WKaKOtPobTWWY1B89aPzRaG6NCj1b438IEIiw3o4", refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZGVrLmRvbGV6YWxAZnV0dXJlZC5hcHAiLCJzdWIiOiI2M2Y5MjE1ZDk0ODI5NDI3NmUzYzYzNmIiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTY4NzI2MTgzOSwiZXhwIjoxNjg3MzQ4MjM5fQ.gkb_1x640AuRH8XxNQ-hEpYU1T2EsahGVgf5-QgimZU")
-        let networkingService = ProductionNetworkingService(baseUrl: baseUrl, keychainService: keychainService)
-        let data = try await networkingService.fetch(query: CompactUserListQuery(filter: UserSelectOptionsFilterInput(onlyActive: true)), cachePolicy: .returnCacheDataAndFetch, queue: .main)
-        return data.userSelectOptions.compactMap {
-            UserCompact(data: $0)
+
+    func processTagsChoises(_ choises: [ChatResult.Choice]) {
+        let choice = choises.first!
+        print("CHOISES: \(choises)")
+        if choice.finishReason == "stop" {
+            DispatchQueue.main.async {
+                print("CHOISES RESULT: \(choice.message.content)")
+                let tags = choice.message.content?.split(separator: ", ")
+                print(tags, tags?.compactMap { Tag(value: String($0)) } ?? [])
+                self.searchedTags = tags?.compactMap { Tag(value: String($0)) } ?? []
+            }
+        }
+    }
+
+    func analyzeGiphy(prompt: [Chat]) {
+        openAI.chats(query: ChatQuery(
+            model: .gpt4_0613,
+            messages: prompt
+        )) { result in
+            switch result {
+            case .success(let response):
+                self.processGiphyChoises(response.choices)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func processGiphyChoises(_ choises: [ChatResult.Choice]) {
+        let choice = choises.first!
+        print("CHOISES: \(choises)")
+        if choice.finishReason == "stop" {
+            print("CHOISES GIPHY RESULT: \(choice.message.content)")
+            loadGIF(for: choice.message.content ?? "Random gif")
         }
     }
     
     func loadGIF(for term: String) {
+        print("GIF TERM: \(term)")
         let url = URL(string: "https://api.giphy.com/v1/gifs/search")!
         let params: URLQuery = [
             "api_key": "Di5swh6HM4cr9DRQCnAzYeabXvamqMpe",
             "q": term
         ]
         let request = URLRequest(url: url.appendingQuery(params))
+        print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 print("ERROR: Nejsou data")
@@ -88,50 +107,63 @@ struct AnalyzeView: View {
             let decoder = JSONDecoder()
             do {
                 let parsedData = try decoder.decode(GIPHYResponse.self, from: data)
-                print("NAPARSOVAL JSEM:", parsedData)
-                searchedGif = parsedData.data.first
+                DispatchQueue.main.async {
+                    self.searchedGif = parsedData.data.first
+                }
             } catch {
                 print("ERROR PICO: ", error)
             }
         }
         task.resume()
     }
-    
-    func analyze(text: String) {
-//        openAI.chats(query: ChatQuery(
-//            model: .gpt4_0613,
-//            messages: [Chat(role: .user, content: prompt)],
-//            functions: functions
-//        )) { result in
-//            switch result {
-//            case .success(let response):
-//                process(choises: response.choices)
-//            case .failure(let error):
-//                self.response = error.localizedDescription
-//            }
-//        }
-    }
-    
-    
 }
 
-import SwiftUI
-import WebKit
- 
-struct WebView: UIViewRepresentable {
- 
-    var url: URL
- 
-    func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
-    }
- 
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        let request = URLRequest(url: url)
-        webView.load(request)
+
+// View that containts TextField input
+struct AnalyzeView: View {
+    @StateObject var object: AnalyzeObject = AnalyzeObject()
+    
+    @State var inputText: String = "Za to, že se stará tak hezky o mojí mámu."
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                HStack {
+                    TextField("Input", text: $inputText)
+                        .padding()
+
+                    Button("Analyze") {
+                        object.analyze(prompt: inputText)
+                    }
+                    .padding()
+                }
+                .padding(5)
+                .background(Color.gray.opacity(0.3))
+                .cornerRadius(15)
+                
+                if !object.searchedTags.isEmpty {
+                    VStack(alignment: .center, spacing: 4) {
+                        ForEach(object.searchedTags) { tag in
+                            Text(tag.value)
+                                .padding(.horizontal, 10)
+                                .frame(height: 30)
+                                .background(Color.blue)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(15)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+                
+                if let gifUrl = object.searchedGif?.embed_url {
+                    WebView(url: URL(urlString: gifUrl))
+                        .frame(width: 300, height: 200)
+                }
+            }
+            .padding(.horizontal, 16)
+        }
     }
 }
-
 
 struct GIPHYResponse: Codable {
     let data: [GIPHYClip]
@@ -225,14 +257,4 @@ extension UserCompact {
         fullname = data.label
     }
 }
-
-
-
-// preview
-struct AnalyzeView_Previews: PreviewProvider {
-    static var previews: some View {
-        AnalyzeView()
-    }
-}
-
 

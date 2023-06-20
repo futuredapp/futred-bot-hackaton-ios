@@ -193,7 +193,6 @@ struct ChatView: View {
             .padding(5)
             .background(Color.gray.opacity(0.3))
             .cornerRadius(15)
-            .padding()
 
             Spacer()
 
@@ -204,6 +203,7 @@ struct ChatView: View {
             Spacer()
 
         }
+        .padding(.horizontal, 16)
         .task {
             chat.loadUsers()
         }

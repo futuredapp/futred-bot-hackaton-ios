@@ -14,11 +14,11 @@ struct FuturedBotApp: App {
             TabView {
                 ChatView()
                     .tabItem {
-                        Label("Chat", systemImage: "message")
+                        Label("Actions", systemImage: "paperplane")
                     }
                 AnalyzeView()
                     .tabItem {
-                        Label("Settings", systemImage: "gear")
+                        Label("Analysis", systemImage: "sparkle.magnifyingglass")
                     }
             }
         
