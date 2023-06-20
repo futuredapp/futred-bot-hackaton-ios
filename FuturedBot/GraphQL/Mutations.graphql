@@ -1,0 +1,20 @@
+mutation Login($jwt: JWT!) {
+  loginWithGoogle(jwt: $jwt) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation RefreshToken($refreshToken: JWT!) {
+  refreshToken(refreshToken: $refreshToken) {
+    accessToken
+  }
+}
+
+mutation GiveKudos($input: GiveKudosInput!) {
+  giveKudos(input: $input) {
+    id
+  }
+}
+
+

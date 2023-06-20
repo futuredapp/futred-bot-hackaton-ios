@@ -1,0 +1,148 @@
+query Home($pagination: PaginationInput!) {
+  me {
+    avatar
+    balance
+    budget
+    email
+    firstname
+    fullname
+    id
+    position
+    lastname
+    role
+    totalReceived
+    receivedThisMonth
+  }
+  latestTransactions(pagination: $pagination) {
+        edges {
+      ... on Kudos {
+        amount
+        createdAt
+        from {
+          avatar
+          fullname
+          id
+        }
+        id
+        message
+        to {
+          avatar
+          fullname
+          id
+        }
+        type
+      }
+      ... on Reward {
+        amount
+        createdAt
+        id
+        message
+        to {
+          avatar
+          fullname
+          id
+        }
+        type
+      }
+    }
+  }
+}
+
+query LoggedUser {
+  me {
+    avatar
+    balance
+    budget
+    email
+    firstname
+    fullname
+    id
+    lastname
+    position
+    receivedThisMonth
+    role
+    slackNotificationsEnabled
+    totalReceived
+  }
+}
+
+query CompactUserList($filter: UserSelectOptionsFilterInput) {
+  userSelectOptions(filter: $filter) {
+    label
+    value
+  }
+}
+
+query MyTransactions($pagination: PaginationInput!) {
+  myTransactions(pagination: $pagination) {
+    edges {
+      ... on Kudos {
+        amount
+        createdAt
+        from {
+          avatar
+          fullname
+          id
+        }
+        id
+        message
+        to {
+          avatar
+          fullname
+          id
+        }
+        type
+      }
+      ... on Reward {
+        amount
+        createdAt
+        id
+        message
+        proposal {
+          id
+          to {
+            avatar
+            fullname
+            id
+          }
+        }
+        to {
+          avatar
+          fullname
+          id
+        }
+        type
+      }
+      ... on UserPurchase {
+        amount
+        benefit {
+          id
+          price
+          title
+          description
+          image
+        }
+        createdAt
+        from {
+          avatar
+          fullname
+          id
+        }
+        id
+        type
+      }
+    }
+  }
+}
+
+query Leaderboard($filter: LeaderboardFilterInput!) {
+  leaderboard(filter: $filter) {
+    amount
+    id
+    user {
+      avatar
+      fullname
+      id
+    }
+  }
+}
